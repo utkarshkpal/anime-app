@@ -1,0 +1,8 @@
+@import "./reset.css";
+@import "./typography.css";
+
+.container {
+  padding: 3rem 20rem;
+}
+
+/*GRID CLASSES*/
