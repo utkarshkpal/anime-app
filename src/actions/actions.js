@@ -1,4 +1,3 @@
-import { Dispatch } from "redux";
 import ApiProviders from "services/ApiProviders";
 
 export const SET_DATA = "SET_DATA";
@@ -9,11 +8,7 @@ export const SET_LAST_PAGE = "SET_LAST_PAGE";
 
 const apiProviders = new ApiProviders();
 
-export const fetchItems = (query, page = 1) => async (
-  dispatch,
-  getState,
-  apiProvider
-) => {
+export const fetchItems = (query, page = 1) => async (dispatch) => {
   const { lastPage, results } = await apiProviders.searchItems(query, page);
 
   dispatch({
@@ -34,11 +29,7 @@ export const fetchItems = (query, page = 1) => async (
   });
 };
 
-export const loadMoreItems = (page) => async (
-  dispatch,
-  getState,
-  apiProvider
-) => {
+export const loadMoreItems = (page) => async (dispatch, getState) => {
   const {
     app: { query },
   } = getState();

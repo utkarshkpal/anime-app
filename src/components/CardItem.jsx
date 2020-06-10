@@ -1,17 +1,15 @@
 import React from "react";
 import "./CardItem.css";
-import img from "naruto.jpg";
 
-export default function CardItem({ imageUrl, malId, title, url }) {
+export default function CardItem({ imageUrl, title, url }) {
   return (
     <li
       onClick={() => {
         window.open(url);
       }}
-      key={malId}
       className="image-card"
     >
-      <img src={imageUrl} alt="image" />
+      <img src={imageUrl} alt="card-img" />
       <div className="image-text">
         <p>{title}</p>
       </div>

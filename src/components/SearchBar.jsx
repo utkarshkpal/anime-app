@@ -3,11 +3,9 @@ import "./SearchBar.css";
 
 export default function SearchBar({ onSearch, defaultValue }) {
   const [value, setValue] = useState(defaultValue);
-
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       onSearch(value);
@@ -18,7 +16,6 @@ export default function SearchBar({ onSearch, defaultValue }) {
     <div className="search-bar">
       <input
         value={value}
-        defaultValue={defaultValue}
         onChange={handleChange}
         type="text"
         onKeyDown={handleKeyDown}

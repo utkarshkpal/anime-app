@@ -1,35 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import img from "./naruto.jpg";
 import "./css/index.css";
 import SearchBar from "components/SearchBar";
 import CardList from "components/CardList";
-import ApiProviders from "services/ApiProviders";
 import { fetchItems, loadMoreItems } from "actions/actions";
 
-const apiProviders = new ApiProviders();
-
 function App() {
-  const [items, setItems] = useState([]);
-
   const dispatch = useDispatch();
-
   const query = useSelector((state) => state.app.query);
   const currPage = useSelector((state) => state.app.currPage);
   const lastPage = useSelector((state) => state.app.lastPage);
 
   useEffect(() => {
     dispatch(fetchItems(query, currPage));
-  }, [dispatch]);
+  }, []);
 
-  const LoadMoreVisible = () => {
-    if (currPage < lastPage) return true;
-    return false;
-  };
+  const LoadMoreVisible = () => currPage < lastPage;
 
   const handleSearch = (query) => {
-    console.log("handleSearch -> query", query);
-
     dispatch(fetchItems(query));
   };
 

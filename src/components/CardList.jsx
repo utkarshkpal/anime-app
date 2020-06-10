@@ -7,12 +7,10 @@ export default function CardList() {
   const items = useSelector((state) => state.app.items);
 
   return (
-    <>
-      <ul className="card-list">
-        {items.map((item) => (
-          <CardItem {...item} />
-        ))}
-      </ul>
-    </>
+    <ul className="card-list">
+      {items.map((item) => (
+        <CardItem key={item.malId} {...item} />
+      ))}
+    </ul>
   );
 }
