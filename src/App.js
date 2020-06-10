@@ -1,39 +1,55 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import img from "./naruto.jpg";
 import "./css/index.css";
 import SearchBar from "components/SearchBar";
 import CardList from "components/CardList";
-import { getListItems } from "ApiProviders";
+import ApiProviders from "services/ApiProviders";
+import { fetchItems, loadMoreItems } from "actions/actions";
+
+const apiProviders = new ApiProviders();
 
 function App() {
   const [items, setItems] = useState([]);
-  const [currPage, setCurrPage] = useState(1);
-  const [query, setQuery] = useState("");
+
+  const dispatch = useDispatch();
+
+  const query = useSelector((state) => state.app.query);
+  const currPage = useSelector((state) => state.app.currPage);
+  const lastPage = useSelector((state) => state.app.lastPage);
 
   useEffect(() => {
-    fetchItems("naruto", currPage);
-  }, []);
+    dispatch(fetchItems(query, currPage));
+  }, [dispatch]);
 
-  useEffect(() => {
-    fetchItems(query, currPage);
-  }, [currPage]);
+  const LoadMoreVisible = () => {
+    if (currPage < lastPage) return true;
+    return false;
+  };
 
-  const fetchItems = async (query, page = currPage) => {
-    const { data } = await getListItems(query, page);
-    setItems([...items, ...data.results]);
+  const handleSearch = (query) => {
+    console.log("handleSearch -> query", query);
+
+    dispatch(fetchItems(query));
   };
 
   const handleLoadMore = () => {
-    setCurrPage(currPage + 1);
+    dispatch(loadMoreItems(currPage + 1));
   };
 
   return (
-    <div className="App">
-      <div className="container">
-        <SearchBar value={query} onSearch={fetchItems} onUpdate={setQuery} />
-        <CardList items={items} />
-        <button onClick={handleLoadMore}> load more</button>
-      </div>
+    <div className="app">
+      <header>
+        <SearchBar defaultValue={query} onSearch={handleSearch} />
+      </header>
+      <CardList />
+      {LoadMoreVisible() && (
+        <div className="btn-wrapper">
+          <button className="load-btn" onClick={handleLoadMore}>
+            Load More
+          </button>
+        </div>
+      )}
     </div>
   );
 }

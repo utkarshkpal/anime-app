@@ -1,8 +1,29 @@
 @import "./reset.css";
 @import "./typography.css";
 
-.container {
-  padding: 3rem 20rem;
+.app {
+  padding: 3rem 18rem;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: #1d77c0;
+  padding: 3rem;
+}
+
+.btn-wrapper {
+  height: 14rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.load-btn {
+  border: 2px solid #75a4d5;
+  font-size: 3rem;
+  padding: 1rem 2rem;
+  border-radius: 0.6rem;
 }
 
 /*GRID CLASSES*/

@@ -2,7 +2,7 @@
   position: relative;
 }
 
-button {
+.search-btn {
   background-color: transparent;
   border-width: 0;
   font-size: 3rem;
@@ -10,6 +10,7 @@ button {
   cursor: pointer;
   right: 3rem;
   top: 3.2rem;
+  position: absolute;
 }
 input {
   width: 100%;
@@ -22,10 +23,6 @@ input {
   font-size: 3rem;
   border-radius: 0.6rem;
   outline: none;
-}
-
-button {
-  position: absolute;
 }
 
 input::placeholder {
