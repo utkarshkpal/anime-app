@@ -1,8 +1,6 @@
 import axios from "axios";
 import camelcaseKeysDeep from "camelcase-keys-deep";
 
-//api.jikan.moe/v3/search/anime?q=<query>&limit=16&page=<pagenu>
-
 const BASE_URL = "https://api.jikan.moe/v3";
 
 export default class ApiProviders {

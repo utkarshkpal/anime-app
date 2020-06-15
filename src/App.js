@@ -3,22 +3,22 @@ import { useSelector, useDispatch } from "react-redux";
 import "./css/index.css";
 import SearchBar from "components/SearchBar";
 import CardList from "components/CardList";
-import { fetchItems, loadMoreItems } from "actions/actions";
+import { fetchNewItems, loadMoreItems } from "actions/actions";
 
 function App() {
   const dispatch = useDispatch();
-  const query = useSelector((state) => state.app.query);
-  const currPage = useSelector((state) => state.app.currPage);
-  const lastPage = useSelector((state) => state.app.lastPage);
+  const query = useSelector((state) => state.search.query);
+  const currPage = useSelector((state) => state.search.currPage);
+  const lastPage = useSelector((state) => state.search.lastPage);
 
   useEffect(() => {
-    dispatch(fetchItems(query, currPage));
+    dispatch(fetchNewItems(query, currPage));
   }, []);
 
   const LoadMoreVisible = () => currPage < lastPage;
 
   const handleSearch = (query) => {
-    dispatch(fetchItems(query));
+    dispatch(fetchNewItems(query));
   };
 
   const handleLoadMore = () => {

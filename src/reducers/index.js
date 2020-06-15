@@ -1,11 +1,5 @@
 import { combineReducers } from "redux";
-import {
-  SET_DATA,
-  SET_CURR_PAGE,
-  SET_QUERY,
-  SET_LAST_PAGE,
-  ADD_DATA,
-} from "actions/actions";
+import { FETCH_NEW_ITEMS, LOAD_MORE_ITEMS } from "actions/actions";
 
 const blankState = {
   items: [],
@@ -14,26 +8,29 @@ const blankState = {
   lastPage: 1,
 };
 
-export function appReducer(state = blankState, action) {
+export function searchReducer(state = blankState, action) {
   switch (action.type) {
-    case SET_DATA:
-      return { ...state, items: [...action.payload] };
-    case ADD_DATA:
-      return { ...state, items: [...state.items, ...action.payload] };
-    case SET_CURR_PAGE:
-      return { ...state, currPage: action.payload };
-    case SET_QUERY:
-      return { ...state, query: action.payload };
-    case SET_LAST_PAGE:
-      return { ...state, lastPage: action.payload };
-
+    case FETCH_NEW_ITEMS:
+      return {
+        ...state,
+        currPage: action.payload.currPage,
+        query: action.payload.query,
+        items: action.payload.items,
+        lastPage: action.payload.lastPage,
+      };
+    case LOAD_MORE_ITEMS:
+      return {
+        ...state,
+        currPage: action.payload.currPage,
+        items: [...state.items, ...action.payload.items],
+      };
     default:
       return state;
   }
 }
 
 const rootReducer = combineReducers({
-  app: appReducer,
+  search: searchReducer,
 });
 
 export default rootReducer;

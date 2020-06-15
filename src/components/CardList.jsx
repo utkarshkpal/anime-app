@@ -4,7 +4,7 @@ import CardItem from "components/CardItem";
 import { useSelector } from "react-redux";
 
 export default function CardList() {
-  const items = useSelector((state) => state.app.items);
+  const items = useSelector((state) => state.search.items);
 
   return (
     <ul className="card-list">

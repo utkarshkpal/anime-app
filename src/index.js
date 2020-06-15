@@ -13,8 +13,8 @@ import rootReducer from "reducers";
 const apiProviders = new ApiProviders();
 
 const enhancer = compose(
-  applyMiddleware(thunk.withExtraArgument(apiProviders))
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  applyMiddleware(thunk.withExtraArgument(apiProviders)),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 const store = createStore(rootReducer, enhancer);
 
